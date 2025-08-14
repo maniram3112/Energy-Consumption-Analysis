@@ -15,13 +15,13 @@ CREATE TABLE emission_3 (
     country VARCHAR(100),
     energy_type VARCHAR(50),
     year INT,
-    emission INT,
+    emission DOUBLE,
     per_capita_emission DOUBLE,
     FOREIGN KEY (country) REFERENCES country(Country)
 );
 
+drop table emission_3;
 select * from emission_3;
-truncate table emission_3;
 
 -- 3. population table
 CREATE TABLE population (
@@ -30,15 +30,20 @@ CREATE TABLE population (
     Value DOUBLE,
     FOREIGN KEY (countries) REFERENCES country(Country)
 );
+-- 2 data points are missing
+select count(*) from population;
 
 -- 4. production table
 CREATE TABLE production (
     country VARCHAR(100),
     energy VARCHAR(50),
     year INT,
-    production INT,
+    production DOUBLE,
     FOREIGN KEY (country) REFERENCES country(Country)
 );
+
+-- 4 datapoints are missing
+select * from production;
 
 -- 5. gdp_3 table
 CREATE TABLE gdp_3 (
@@ -48,11 +53,16 @@ CREATE TABLE gdp_3 (
     FOREIGN KEY (Country) REFERENCES country(Country)
 );
 
+select * from gdp_3;
+
 -- 6. consumption table
 CREATE TABLE consumption (
     country VARCHAR(100),
     energy VARCHAR(50),
     year INT,
-    consumption INT,
+    consumption DOUBLE,
     FOREIGN KEY (country) REFERENCES country(Country)
 );
+
+-- 4 datapoints are missing
+select * from consumption;
