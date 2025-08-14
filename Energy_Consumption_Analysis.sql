@@ -20,8 +20,8 @@ CREATE TABLE emission_3 (
     FOREIGN KEY (country) REFERENCES country(Country)
 );
 
-drop table emission_3;
-select * from emission_3;
+-- 2 data points are missing
+select count(*) from emission_3;
 
 -- 3. population table
 CREATE TABLE population (
@@ -30,7 +30,7 @@ CREATE TABLE population (
     Value DOUBLE,
     FOREIGN KEY (countries) REFERENCES country(Country)
 );
--- 2 data points are missing
+-- 1 data point is missing
 select count(*) from population;
 
 -- 4. production table
@@ -42,8 +42,8 @@ CREATE TABLE production (
     FOREIGN KEY (country) REFERENCES country(Country)
 );
 
--- 4 datapoints are missing
-select * from production;
+-- 3 datapoints are missing
+select count(*) from production;
 
 -- 5. gdp_3 table
 CREATE TABLE gdp_3 (
@@ -53,7 +53,7 @@ CREATE TABLE gdp_3 (
     FOREIGN KEY (Country) REFERENCES country(Country)
 );
 
-select * from gdp_3;
+select count(*) from gdp_3;
 
 -- 6. consumption table
 CREATE TABLE consumption (
