@@ -66,3 +66,81 @@ CREATE TABLE consumption (
 
 -- 4 datapoints are missing
 select * from consumption;
+
+
+-- Relationships between the tables
+
+-- 1. emission_3 -> country
+ALTER TABLE emission_3
+	ADD CONSTRAINT fk_emission_country
+    FOREIGN KEY (country)
+    REFERENCES country(Country)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+-- 2. population -> country
+ALTER TABLE population
+ADD CONSTRAINT fk_population_country
+FOREIGN KEY (countries)
+REFERENCES country(Country)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+-- 3. production -> country
+ALTER TABLE production
+ADD CONSTRAINT fk_production_country
+FOREIGN KEY (country)
+REFERENCES country(Country)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+-- 4. gdp_3 → country
+ALTER TABLE gdp_3
+ADD CONSTRAINT fk_gdp_country
+FOREIGN KEY (Country)
+REFERENCES country(Country)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+-- 5. consumption → country
+ALTER TABLE consumption
+ADD CONSTRAINT fk_consumption_country
+FOREIGN KEY (country)
+REFERENCES country(Country)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+-- Data Analysis Questions
+
+-- 1. General & Comparative Analysis
+-- a. What is the total emission per country for the most recent year available?
+SELECT country, sum(emission) total_emission
+	FROM emission_3
+    WHERE `year` = (SELECT MAX(`year`) FROM emission_3)
+    GROUP BY country
+    ORDER BY total_emission DESC;
+
+-- b. What are the top 5 countries by GDP in the most recent year?
+SELECT Country, `Value` as GDP_Value
+	FROM gdp_3
+    WHERE `year` = (SELECT MAX(`year`) FROM gdp_3)
+    ORDER BY `Value` DESC
+    LIMIT 5;
+
+-- c. Compare energy production and consumption by country and year?
+SELECT c.country,
+	c.`year`,
+    SUM(p.production) as total_production,
+    SUM(c.consumption) as total_consumption
+	FROM consumption c
+    INNER JOIN production p
+		ON (c.country = p.country)
+        AND (c.`year` = p.`year`)
+	GROUP BY p.country, p.`year`
+    ORDER BY p.`year` DESC, p.country;
+
+-- d. Which energy types contribute most to emissions across all countries?
+SELECT energy_type, SUM(emission) as total_emissions
+	FROM emission_3
+    GROUP BY energy_type
+    ORDER BY total_emissions DESC;
