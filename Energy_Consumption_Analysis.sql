@@ -21,7 +21,7 @@ CREATE TABLE emission_3 (
 );
 
 -- 2 data points are missing
-select count(*) from emission_3;
+select * from emission_3;
 
 -- 3. population table
 CREATE TABLE population (
@@ -31,7 +31,7 @@ CREATE TABLE population (
     FOREIGN KEY (countries) REFERENCES country(Country)
 );
 -- 1 data point is missing
-select count(*) from population;
+select * from population;
 
 -- 4. production table
 CREATE TABLE production (
@@ -53,7 +53,7 @@ CREATE TABLE gdp_3 (
     FOREIGN KEY (Country) REFERENCES country(Country)
 );
 
-select count(*) from gdp_3;
+select * from gdp_3;
 
 -- 6. consumption table
 CREATE TABLE consumption (
@@ -102,6 +102,7 @@ REFERENCES country(Country)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
 
+
 -- 5. consumption → country
 ALTER TABLE consumption
 ADD CONSTRAINT fk_consumption_country
@@ -109,7 +110,3 @@ FOREIGN KEY (country)
 REFERENCES country(Country)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
-
--- Data Analysis Questions
-
--- 1. General & Comparative Analysis
