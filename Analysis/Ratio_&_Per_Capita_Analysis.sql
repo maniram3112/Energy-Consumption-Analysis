@@ -39,7 +39,7 @@ SELECT c.country, c.`year`, c.energy, c.consumption, g.`Value`,
 		ON c.country = g.country
         AND c.`year` = g.`year`
 	ORDER BY consumption_per_GDP DESC
-    LIMIT 10;
+    LIMIT 20;
 
 -- 5. What is the correlation between GDP growth and energy production growth?
 WITH gdp_growth AS (

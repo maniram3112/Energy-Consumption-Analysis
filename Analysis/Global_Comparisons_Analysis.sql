@@ -24,7 +24,7 @@ SELECT
 	   AND e1.year = (SELECT MIN(year) FROM emission_3)
 	   AND e2.year = (SELECT MAX(year) FROM emission_3)
 	ORDER BY reduction DESC;
-	-- LIMIT 10;
+    -- LIMIT 10;
 
 -- c. What is the global share (%) of emissions by country?
 SELECT 

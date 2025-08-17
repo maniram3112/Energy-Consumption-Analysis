@@ -43,7 +43,7 @@ CREATE TABLE production (
 );
 
 -- 3 datapoints are missing
-select count(*) from production;
+select * from production;
 
 -- 5. gdp_3 table
 CREATE TABLE gdp_3 (
