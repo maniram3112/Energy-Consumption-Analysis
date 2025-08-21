@@ -1,7 +1,3 @@
-Here’s a **professional README.md** you can use for your GitHub project 👇
-
----
-
 # SQL Data Analysis: Global Emissions & GDP
 
 ## Project Overview
